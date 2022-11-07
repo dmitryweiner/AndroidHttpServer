@@ -4,7 +4,9 @@ import com.nopalsoft.http.server.server.GeneralException
 import com.nopalsoft.http.server.server.model.User
 
 interface UserRepository {
-    fun userList(): ArrayList<User>
+    fun userList(): List<User>
+
+    fun getUser(id: Int): User
 
     fun addUser(user: User): User
 
@@ -12,10 +14,21 @@ interface UserRepository {
 }
 
 class UserRepositoryImp : UserRepository {
-    private var idCount = 0
-    private val userList = ArrayList<User>()
+    private val userList = mutableListOf<User>(
+        User(1, "John Smith", "john.smith", "john@yahoo.com", "+191223425", "jhnsmth.yahoo.com"),
+        User(2, "Sarah Connor", "sarrah", "sconnor@altavista.com", "+1487216423", "killterminator.com"),
+        User(3, "Clementine Bauch", "Samantha", "Nathan@yesenia.net", "1-463-123-4447", "ramiro.info"),
+    )
+    private var idCount = userList.size
 
-    override fun userList(): ArrayList<User> = userList
+    override fun userList(): List<User> = userList
+
+    override fun getUser(id: Int): User {
+        userList.find { it.id == id }?.let {
+            return it
+        }
+        throw GeneralException("User not found: $id")
+    }
 
     override fun addUser(user: User): User {
         val newUser = user.copy(id = ++idCount);

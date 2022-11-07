@@ -6,9 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import com.nopalsoft.http.server.server.controllers.postController
 import com.nopalsoft.http.server.server.controllers.userController
+import com.nopalsoft.http.server.server.repositories.PostRepository
+import com.nopalsoft.http.server.server.repositories.PostRepositoryImp
 import com.nopalsoft.http.server.server.repositories.UserRepository
 import com.nopalsoft.http.server.server.repositories.UserRepositoryImp
+import com.nopalsoft.http.server.server.services.PostService
 import com.nopalsoft.http.server.server.services.UserService
 
 import io.ktor.application.*
@@ -39,11 +43,14 @@ class HttpService : Service() {
                         module {
                             single<UserRepository> { UserRepositoryImp() }
                             single { UserService() }
+                            single<PostRepository> { PostRepositoryImp() }
+                            single { PostService() }
                         }
                     )
                 }
                 install(Routing) {
                     userController()
+                    postController()
                 }
             }.start(wait = true)
         }.start()

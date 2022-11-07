@@ -13,17 +13,22 @@ fun Route.userController() {
 
     val userService by inject<UserService>()
 
-    get("/user") {
-        call.respond(ResponseBase(data = userService.userList()))
+    get("/users") {
+        call.respond(userService.userList())
     }
 
-    post("/user") {
+    get("/users/{id}") {
+        val id = call.parameters["id"]?.toInt()!!
+        call.respond(userService.getUser(id))
+    }
+
+    post("/users") {
         val person = call.receive<User>()
-        call.respond(ResponseBase(data = userService.addUser(person)))
+        call.respond(userService.addUser(person))
     }
 
-    delete("/user/{id}") {
-        val id = call.parameters["id"]?.toInt()!! // Force just for this example
-        call.respond(ResponseBase(data = userService.removeUser(id)))
+    delete("/users/{id}") {
+        val id = call.parameters["id"]?.toInt()!!
+        call.respond(userService.removeUser(id))
     }
 }

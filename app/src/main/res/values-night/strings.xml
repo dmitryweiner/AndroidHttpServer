@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="greetings">The server was successfully started.\n Available routes:\n \n All posts:\n http://127.0.0.1:8080/posts\n Get post by id:\n http://127.0.0.1:8080/posts/1\n \n All users:\n http://127.0.0.1:8080/users\n Get user by id:\n http://127.0.0.1:8080/users/1</string>
+</resources>

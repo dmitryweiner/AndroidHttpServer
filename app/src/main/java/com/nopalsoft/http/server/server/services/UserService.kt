@@ -14,13 +14,13 @@ class UserService : KoinComponent {
 
     fun userList(): List<User> = userRepository.userList()
 
+    fun getUser(id: Int): User = userRepository.getUser(id)
+
     fun addUser(user: User): User {
         if (user.name == null)
             throw MissingParamsException("name")
-        if (user.age == null)
-            throw MissingParamsException("age")
-        if (user.age < 0)
-            throw GeneralException("Age cannot be negative number")
+        if (user.email == null)
+            throw MissingParamsException("email")
         return userRepository.addUser(user)
     }
 
