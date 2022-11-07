@@ -8,3 +8,5 @@ Available routes:
 * Users:
  * All users: http://127.0.0.1:8080/users
  * Get user by id: http://127.0.0.1:8080/users/1
+ 
+ [Compiled application](https://github.com/dmitryweiner/AndroidHttpServer/raw/master/app-debug.apk)
